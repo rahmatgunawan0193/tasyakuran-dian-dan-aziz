@@ -225,7 +225,7 @@
             <div class="my-8">
                 <p class="text-lg text-gray-200">Kepada Yth.</p>
                 <p class="text-xl font-semibold">Bapak/Ibu/Saudara/i</p>
-                <p class="text-2xl font-bold mt-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg">Tamu Undangan</p>
+                <p class="text-2xl font-bold mt-2 bg-white bg-opacity-20 px-4 py-2 rounded-lg"><span class="namatamu">Tamu Undangan</span></p>
             </div>
             <!-- Tombol disesuaikan dengan warna emerald -->
             <button id="openButton" class="mt-4 bg-white text-brand-secondary font-bold py-3 px-8 rounded-full shadow-lg transform transition-transform hover:scale-105">
@@ -645,10 +645,29 @@
             startCountdown();
 
         });
+        // Fungsi untuk mengambil parameter dari URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Ambil nama dari parameter URL
+        let namaTamu = getQueryParam('nama');
+
+        // Validasi dan tampilkan
+        if (namaTamu && namaTamu.trim() !== "") {
+            // Decode agar spasi dan karakter khusus terbaca
+            namaTamu = decodeURIComponent(namaTamu);
+            document.querySelector('.namatamu').textContent = namaTamu;
+        } else {
+            // Jika tidak ada parameter nama, tampilkan default
+            document.querySelector('.namatamu').textContent = "Tamu Undangan";
+        }
     </script>
 
 </body>
 </html>
+
 
 
 
